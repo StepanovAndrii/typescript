@@ -1,11 +1,11 @@
 // Random function to generate random numbers
-function getRandomNumber(min, max) {
+function getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // Generate an array of random numbers
-function generateRandomArray(size, min, max) {
-    let arr = [];
+function generateRandomArray(size: number, min: number, max: number): number[] {
+    let arr: number[] = [];
     for (let i = 0; i < size; i++) {
         arr.push(getRandomNumber(min, max));
     }
@@ -13,16 +13,16 @@ function generateRandomArray(size, min, max) {
 }
 
 // Simple sum function
-function sumArray(arr) {
-    let sum = 0;
-    arr.forEach(num => {
+function sumArray(arr: number[]): number {
+    let sum: number = 0;
+    arr.forEach((num: number) => {
         sum += num;
     });
     return sum;
 }
 
 // Check if number is prime
-function isPrime(num) {
+function isPrime(num: number): boolean {
     if (num <= 1) return false;
     for (let i = 2; i <= Math.sqrt(num); i++) {
         if (num % i === 0) {
@@ -33,52 +33,56 @@ function isPrime(num) {
 }
 
 // Filter prime numbers from array
-function filterPrimes(arr) {
-    return arr.filter(num => isPrime(num));
+function filterPrimes(arr: number[]): number[] {
+    return arr.filter((num: number) => isPrime(num));
 }
 
 // Calculate factorial recursively
-function factorial(n) {
+function factorial(n: number): number {
     if (n === 0 || n === 1) return 1;
     return n * factorial(n - 1);
 }
 
 // Create object for students
 class Student {
-    constructor(name, age, grades) {
+    name: string;
+    age: number;
+    grades: number[];
+
+    constructor(name: string, age: number, grades: number[]) {
         this.name = name;
         this.age = age;
         this.grades = grades;
     }
 
     // Method to calculate average grade
-    getAverageGrade() {
+    getAverageGrade(): number {
         return sumArray(this.grades) / this.grades.length;
     }
 
     // Method to determine if the student passed
-    didPass() {
+    didPass(): boolean {
         return this.getAverageGrade() > 50;
     }
 }
 
 // Generate random students
-function generateRandomStudents(count) {
-    let students = [];
-    let names = ['Anna', 'John', 'Max', 'Olga', 'Sasha'];
+function generateRandomStudents(count: number): Student[] {
+    let students: Student[] = [];
+    let names: string[] = ['Anna', 'John', 'Max', 'Olga', 'Sasha'];
     for (let i = 0; i < count; i++) {
-        let name = names[getRandomNumber(0, names.length - 1)];
-        let age = getRandomNumber(18, 30);
-        let grades = generateRandomArray(5, 0, 100);
+        let name: string = names[getRandomNumber(0, names.length - 1)];
+        let age: number = getRandomNumber(18, 30);
+        let grades: number[] = generateRandomArray(5, 0, 100);
         students.push(new Student(name, age, grades));
     }
     return students;
 }
 
 // Find top student based on average grade
-function findTopStudent(students) {
-    let topStudent = students[0];
-    students.forEach(student => {
+function findTopStudent(students: Student[]): Student {
+    let topStudent: Student = students[0];
+    students.forEach((student: Student) => {
         if (student.getAverageGrade() > topStudent.getAverageGrade()) {
             topStudent = student;
         }
@@ -87,9 +91,9 @@ function findTopStudent(students) {
 }
 
 // Simple countdown function
-function countdown(seconds) {
-    let counter = seconds;
-    let interval = setInterval(() => {
+function countdown(seconds: number): void {
+    let counter: number = seconds;
+    let interval: number = setInterval(() => {
         console.log(counter);
         counter--;
         if (counter < 0) {
@@ -100,14 +104,14 @@ function countdown(seconds) {
 }
 
 // Generate random tasks and execute
-function randomTask() {
-    let tasks = ['Math', 'Physics', 'Coding', 'Art', 'History'];
-    let task = tasks[getRandomNumber(0, tasks.length - 1)];
+function randomTask(): void {
+    let tasks: string[] = ['Math', 'Physics', 'Coding', 'Art', 'History'];
+    let task: string = tasks[getRandomNumber(0, tasks.length - 1)];
     console.log(`Your task is: ${task}`);
 }
 
 // Simulate async data fetching
-function fetchData() {
+function fetchData(): Promise<{ id: number, name: string, value: number }> {
     return new Promise(resolve => {
         setTimeout(() => {
             let data = {
@@ -121,22 +125,22 @@ function fetchData() {
 }
 
 // Run async example
-async function runAsyncExample() {
+async function runAsyncExample(): Promise<void> {
     console.log('Fetching data...');
     let data = await fetchData();
     console.log('Data fetched:', data);
 }
 
 // Generate random actions
-function randomAction() {
-    let actions = ['run', 'jump', 'swim', 'read', 'code'];
-    let action = actions[getRandomNumber(0, actions.length - 1)];
+function randomAction(): string {
+    let actions: string[] = ['run', 'jump', 'swim', 'read', 'code'];
+    let action: string = actions[getRandomNumber(0, actions.length - 1)];
     return `I like to ${action}.`;
 }
 
 // Greet based on time
-function greetBasedOnTime() {
-    let hour = new Date().getHours();
+function greetBasedOnTime(): void {
+    let hour: number = new Date().getHours();
     if (hour < 12) {
         console.log('Good morning!');
     } else if (hour < 18) {
@@ -147,8 +151,8 @@ function greetBasedOnTime() {
 }
 
 // Random game simulator
-function gameSimulator() {
-    let score = getRandomNumber(0, 100);
+function gameSimulator(): void {
+    let score: number = getRandomNumber(0, 100);
     if (score > 50) {
         console.log('You win the game!');
     } else {
@@ -157,49 +161,52 @@ function gameSimulator() {
 }
 
 // Recursive function to sum digits of a number
-function sumDigits(num) {
+function sumDigits(num: number): number {
     if (num < 10) return num;
     return (num % 10) + sumDigits(Math.floor(num / 10));
 }
 
 // Calculate average of random numbers
-function averageRandomNumbers(count) {
-    let numbers = generateRandomArray(count, 1, 100);
-    let sum = sumArray(numbers);
+function averageRandomNumbers(count: number): number {
+    let numbers: number[] = generateRandomArray(count, 1, 100);
+    let sum: number = sumArray(numbers);
     return sum / count;
 }
 
 // Simple class for rectangle
 class Rectangle {
-    constructor(width, height) {
+    width: number;
+    height: number;
+
+    constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
     }
 
-    area() {
+    area(): number {
         return this.width * this.height;
     }
 
-    perimeter() {
+    perimeter(): number {
         return 2 * (this.width + this.height);
     }
 }
 
 // Generate random rectangles
-function generateRandomRectangles(count) {
-    let rectangles = [];
+function generateRandomRectangles(count: number): Rectangle[] {
+    let rectangles: Rectangle[] = [];
     for (let i = 0; i < count; i++) {
-        let width = getRandomNumber(1, 100);
-        let height = getRandomNumber(1, 100);
+        let width: number = getRandomNumber(1, 100);
+        let height: number = getRandomNumber(1, 100);
         rectangles.push(new Rectangle(width, height));
     }
     return rectangles;
 }
 
 // Find largest rectangle
-function findLargestRectangle(rectangles) {
-    let largest = rectangles[0];
-    rectangles.forEach(rectangle => {
+function findLargestRectangle(rectangles: Rectangle[]): Rectangle {
+    let largest: Rectangle = rectangles[0];
+    rectangles.forEach((rectangle: Rectangle) => {
         if (rectangle.area() > largest.area()) {
             largest = rectangle;
         }
@@ -208,14 +215,14 @@ function findLargestRectangle(rectangles) {
 }
 
 // Main function to execute random logic
-function main() {
+function main(): void {
     console.log('Random Action: ', randomAction());
     greetBasedOnTime();
 
-    let students = generateRandomStudents(10);
+    let students: Student[] = generateRandomStudents(10);
     console.log('Top Student: ', findTopStudent(students).name);
 
-    let rectangles = generateRandomRectangles(5);
+    let rectangles: Rectangle[] = generateRandomRectangles(5);
     console.log('Largest Rectangle Area: ', findLargestRectangle(rectangles).area());
 
     console.log('Countdown from 5:');
